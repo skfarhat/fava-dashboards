@@ -15,7 +15,7 @@ from fava.beans.abc import Price
 from fava.beans.abc import Transaction
 from fava.context import g
 from fava.core import FavaLedger
-from fava.core.conversion import simple_units
+from fava.core.conversion import UNITS
 from fava.ext import FavaExtensionBase
 from fava.ext import extension_endpoint
 from fava.helpers import FavaAPIError
@@ -144,7 +144,7 @@ class FavaDashboards(FavaExtensionBase):
         for i, row in enumerate(result):
             for k, v in row._asdict().items():
                 if isinstance(v, Inventory):
-                    result[i] = result[i]._replace(**{k: simple_units(v)})
+                    result[i] = result[i]._replace(**{k: UNITS.apply(v, None)})
 
     def sanitize_panel(self, ctx):
         """replace or remove fields which are not JSON serializable"""
