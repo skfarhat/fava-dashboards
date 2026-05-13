@@ -144,7 +144,7 @@ class FavaDashboards(FavaExtensionBase):
         for i, row in enumerate(result):
             for k, v in row._asdict().items():
                 if isinstance(v, Inventory):
-                    result[i] = result[i]._replace(**{k: UNITS.apply(v, None)})
+                    result[i] = result[i]._replace(**{k: UNITS.apply_inventory(v)})
 
     def sanitize_panel(self, ctx):
         """replace or remove fields which are not JSON serializable"""
